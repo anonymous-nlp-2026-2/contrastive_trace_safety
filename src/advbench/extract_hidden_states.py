@@ -25,7 +25,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from tqdm import tqdm
 
-MODEL_PATH = "MODEL_DIR/DeepSeek-R1-Distill-Llama-8B"
+MODEL_PATH = os.environ.get("MODEL_DIR", "models") + "/DeepSeek-R1-Distill-Llama-8B"
 MODEL_NAME = "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
 EXTRACT_LAYERS = list(range(25))  # L0-L24 (model has 33: embedding + 32 transformer layers)
 NUM_EXTRACT_LAYERS = 25

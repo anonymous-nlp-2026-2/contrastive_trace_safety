@@ -4,26 +4,8 @@
 
 \paragraph{Practical recommendations.} We propose three levels of defense against metric-induced layer selection bias (\cref{app:practical_mitigation}). \emph{Level~1 (minimal)}: report layer selections under both threshold-based and frequency-based metric families; divergence exceeding 20\% of model depth indicates metric-induced bias. \emph{Level~2 (recommended)}: compute all five metrics and flag when ${\geq}3$ select layers differing by ${>}20\%$ of depth. \emph{Level~3 (robust)}: a three-layer ensemble averaging predictions from metric-selected layers eliminates pre-selection entirely ($p \leq 0.002$; \cref{tab:ensemble}), but requires cross-validated confirmation.\looseness=-1
 
-Table~\ref{tab:consolidated} consolidates per-model findings across all three contributions.
+Per-model consolidated results appear in \cref{tab:consolidated}.
 
-\begin{table}[t]
-\centering
-\small
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{lccccl}
-\toprule
-\textbf{Model} & \textbf{Layer gap} & $\Delta$\textbf{Prec (384d)} & $\Delta$\textbf{Prec (1024d)} & \textbf{Pos.\ resid.} & \textbf{Evidence} \\
-\midrule
-R1-8B & L0$\to$L14 & +20.1pp \checkmark & +5.8pp $\times$ & Lin \checkmark\ Quad \checkmark & Cross-val. \\
-OT-7B & L0$\to$L16 & +21.9pp \checkmark & +18.1pp \checkmark & Lin \checkmark\ Quad \checkmark & Cross-val. \\
-QwQ-32B$^\dagger$ & L2$\to$L63 & +19.2pp \checkmark & +9.4pp $\times$ & Lin \checkmark\ Quad $\times$ & Suggestive \\
-R1-32B$^\dagger$ & L10$\to$L63 & +15.4pp \checkmark & +11.7pp $\times$ & $\times$\ $\times$ & Suggestive \\
-\bottomrule
-\end{tabular}}
-\caption{Consolidated findings across contributions. Layer gap: crossing-rate composite vs.\ threshold-based selection (C1). $\Delta$Prec: HS$-$text precision advantage at threshold-based layers; \checkmark/{\scriptsize$\times$} = survives/fails Holm--Bonferroni (C2). Pos.\ resid.: HS advantage survives linear/quadratic position residualization. $^\dagger$Sample-limited ($n \leq 20$).}
-\label{tab:consolidated}
-\end{table}
-
-\paragraph{Boundary conditions.} The hidden-state advantage is confirmed at 7--8B (+20--22pp, cross-validated with 13--25\% nested CV shrinkage; \cref{app:nested_cv}) but conditional on several factors. It diminishes from 4/4 to 1/4 significant models with stronger encoders (384d $\to$ 1024d), suggesting that as text encoders improve, the marginal value of hidden-state access decreases. Position partially mediates the advantage: under linear residualization, 3/4 models retain significant non-positional signal (+3.7 to +6.9pp after correction), but R1-32B's residualized gap (+1.9pp) is not significant; quadratic residualization absorbs the advantage in 2/4 models (QwQ-32B and R1-32B fully; R1-8B and OT-7B retain significance; \cref{tab:position_quadratic}). At 32B ($n \leq 20$), effects below 8.6--9.5pp cannot be reliably distinguished from noise at 80\% power (\cref{app:power_analysis}); replication with $n \geq 50$ traces is needed. HarmThoughts is currently the only dataset with step-level CP annotations; AdvBench confirms the geometric mechanism generalizes but does not validate the hidden-state advantage. Ensemble layer selection (\cref{tab:ensemble}) mitigates the bias but false positive rates (11--50\%) preclude deployment.\looseness=-1
+\paragraph{Boundary conditions.} The HS advantage is confirmed at 7--8B (+20--22pp, cross-validated; \cref{app:nested_cv}) but conditional: it diminishes from 4/4 to 1/4 significant models with stronger encoders (384d $\to$ 1024d), and quadratic position residualization absorbs it in 2/4 models (\cref{tab:position_quadratic}). At 32B ($n \leq 20$), effects below 8.6--9.5pp fall within noise (\cref{app:power_analysis}); replication with $n \geq 50$ traces is needed. Ensemble layer selection mitigates metric-induced bias but false positive rates (11--50\%) preclude deployment without conservative operating points (\cref{app:deployment_operating_points}).\looseness=-1
 
 \paragraph{Future work.} Causal interventions on position encoding (e.g., shuffled or ablated position embeddings) would disentangle the content-level safety signal from temporal artifacts. Extending to online detection with streaming probes and calibrated confidence thresholds would move from retrospective characterization toward deployment.\looseness=-1

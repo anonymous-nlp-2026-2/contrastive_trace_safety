@@ -6,9 +6,9 @@ property by replacing PCA with random Gaussian projection.
 
 import os, sys, json, glob, warnings, time
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-# os.environ["HF_DATASETS_OFFLINE"] = "1"  # uncomment for offline mode
-# os.environ["HF_HUB_OFFLINE"] = "1"  # uncomment for offline mode
-# os.environ["HF_ENDPOINT"] = "..."  # set HF mirror if needed
+os.environ["HF_DATASETS_OFFLINE"] = "1"
+os.environ["HF_HUB_OFFLINE"] = "1"
+# os.environ["HF_ENDPOINT"] = "https://huggingface.co"  # set if needed
 warnings.filterwarnings("ignore")
 
 import numpy as np

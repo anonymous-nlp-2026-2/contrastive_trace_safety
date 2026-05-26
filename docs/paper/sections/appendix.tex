@@ -29,6 +29,7 @@
 \cref{app:power_analysis}~Post-Hoc Power Analysis;
 \cref{app:practical_mitigation}~Practical Mitigation Levels;
 \cref{app:32b_full}~32B Model-Specific Analysis;
+\cref{app:consolidated}~Consolidated Per-Model Results;
 Use of AI Assistants.
 
 \section{Layer Sweep Results}
@@ -749,12 +750,12 @@ $\tau$ & HS BA & $\Delta$BA & HS Prec & $\Delta$Prec & HS FPR & $\Delta$FPR \\
 R1-32B HS balanced accuracy varies by only 1.1pp across the full threshold range. The modality advantage ($\Delta$BA $= +0.109$ to $+0.126$, $\Delta$Prec $= +0.113$ to $+0.143$, $\Delta$FPR $= -0.072$ to $-0.106$) is consistent in both magnitude and direction at every threshold, so the HS advantage is not an artifact of the default $\tau{=}0.5$.
 
 
-\section{M002 Bug Disclosure}
+\section{Text Embedding Bug Disclosure}
 \label{app:bug}
 
 We disclose a bug discovered during development that affected intermediate results for QwQ-32B.
 
-\paragraph{Issue.} In experiment M002 (text baseline evaluation), the QwQ-32B text probe was inadvertently initialized with a midpoint heuristic placeholder rather than true sentence embeddings from all-MiniLM-L6-v2. Specifically, the placeholder assigned each step a feature vector equal to the midpoint between the mean safe and mean unsafe embeddings from the training set, with small Gaussian noise added. This made the text probe trivially predictive and produced a spuriously significant result ($p{=}0.001$ for HS vs. text FPR difference).
+\paragraph{Issue.} In the initial text baseline evaluation, the QwQ-32B text probe was inadvertently initialized with a midpoint heuristic placeholder rather than true sentence embeddings from all-MiniLM-L6-v2. Specifically, the placeholder assigned each step a feature vector equal to the midpoint between the mean safe and mean unsafe embeddings from the training set, with small Gaussian noise added. This made the text probe trivially predictive and produced a spuriously significant result ($p{=}0.001$ for HS vs. text FPR difference).
 
 \paragraph{Discovery and correction.} The bug was identified during a systematic audit of the feature extraction pipeline. After correction (using actual sentence embeddings), the QwQ-32B and R1-32B modality comparisons at the originally selected layers (L2 and L10, chosen by the CR-composite metric) showed no significant HS advantage: QwQ-32B accuracy $p{=}0.828$, precision $p{=}0.346$; R1-32B precision $p{=}0.050$ but no tests surviving Holm-Bonferroni. The subsequent discovery that these layer selections were themselves artifacts of metric bias (\cref{sec:layer-results}) led to the threshold-based layer analysis reported in the main text, where the HS advantage follows an evidence gradient at threshold-based deep layers: cross-validated at 7--8B, significant but suggestive of position-competitiveness at QwQ-32B$^\dagger$, and exploratory at R1-32B$^\dagger$ (\cref{tab:hs_vs_text}).
 
@@ -1299,14 +1300,28 @@ We propose a three-level defense against metric-induced layer selection bias.
 
 Results are exploratory ($n{=}19$--$20$; MDE at 80\% power: 8.6--9.5pp; \cref{app:power_analysis}). Both 32B models lack nested CV; LOO-CV and multi-seed analyses (\cref{app:layer_sweep,app:multi_seed}) provide partial robustness checks. R1-32B$^\dagger$ suggests commitment 11--13 steps early (coverage 25\%, $W{=}1$ only; +14.2pp over position baseline, HB; precision +15.4pp); the residualized gap (+1.9pp) is below MDE. QwQ-32B$^\dagger$ achieves significance at all window sizes (74\% coverage, HB) but with negative lead time ($-$1.2 to +1.9 steps); the position baseline achieves higher BA (0.832 vs.\ 0.796, +3.6pp, $p{=}0.133$, NS; \cref{app:position_residual}). Despite sharing the Qwen-32B architecture, the two models present opposite profiles; replication with $n{\geq}50$ traces is needed.
 
-\section*{Use of AI Assistants}
-\addcontentsline{toc}{section}{Use of AI Assistants}
-\label{app:ai-assistants}
+\section*{Consolidated Per-Model Results}
+\addcontentsline{toc}{section}{Consolidated Per-Model Results}
+\label{app:consolidated}
 
-We used Claude (Anthropic) as an AI coding and writing assistant throughout this work. Specifically:
-\begin{itemize}
-    \item \textbf{Code:} drafting experiment scripts, data-processing pipelines, and analysis utilities; debugging and refactoring.
-    \item \textbf{Writing:} drafting and revising paper sections, polishing prose, and reformatting LaTeX.
-    \item \textbf{Literature:} summarizing related papers to inform the related-work section.
-\end{itemize}
+\begin{table}[h]
+\centering
+\small
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lccccl}
+\toprule
+\textbf{Model} & \textbf{Layer gap} & $\Delta$\textbf{Prec (384d)} & $\Delta$\textbf{Prec (1024d)} & \textbf{Pos.\ resid.} & \textbf{Evidence} \\
+\midrule
+R1-8B & L0$\to$L14 & +20.1pp \checkmark & +5.8pp $\times$ & Lin \checkmark\ Quad \checkmark & Cross-val. \\
+OT-7B & L0$\to$L16 & +21.9pp \checkmark & +18.1pp \checkmark & Lin \checkmark\ Quad \checkmark & Cross-val. \\
+QwQ-32B$^\dagger$ & L2$\to$L63 & +19.2pp \checkmark & +9.4pp $\times$ & Lin \checkmark\ Quad $\times$ & Suggestive \\
+R1-32B$^\dagger$ & L10$\to$L63 & +15.4pp \checkmark & +11.7pp $\times$ & $\times$\ $\times$ & Suggestive \\
+\bottomrule
+\end{tabular}}
+\caption{Consolidated findings across contributions. Layer gap: crossing-rate composite vs.\ threshold-based selection (C1). $\Delta$Prec: HS$-$text precision advantage at threshold-based layers; \checkmark/{\scriptsize$\times$} = survives/fails Holm--Bonferroni (C2). Pos.\ resid.: HS advantage survives linear/quadratic position residualization. $^\dagger$Sample-limited ($n \leq 20$).}
+\label{tab:consolidated}
+\end{table}
+
+\section*{Use of AI Assistance}
+We used Claude for coding, code drafting, debugging, and language polishing.
 

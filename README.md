@@ -26,16 +26,37 @@ code/
 │       ├── fpr_analysis.py       # False positive rate analysis
 │       └── trajguard_mahalanobis.py  # Mahalanobis distance baseline
 ├── scripts/                      # Experiment runner scripts
+│   ├── advbench_bootstrap_ci.py           # AdvBench bootstrap CI analysis
+│   ├── advbench_classifier_sensitivity.py # Classifier sensitivity analysis
+│   ├── advbench_classifier_sensitivity_v2.py  # Classifier sensitivity v2 (extended)
+│   ├── advbench_hs_exploratory.py         # AdvBench exploratory analysis
+│   ├── advbench_layer_bias.py             # Layer bias analysis (R1-8B)
+│   ├── advbench_layer_bias_gemma2.py      # Layer bias analysis (Gemma-2-9B)
+│   ├── advbench_layer_bias_gemma4.py      # Layer bias analysis (Gemma-4-E4B)
+│   ├── advbench_phase4_layer_sweep.py     # Phase 4 layer sweep
 │   ├── advbench_preliminary_sweep.py      # Layer sweep (25L × 4W × 5 metrics)
 │   ├── advbench_preliminary_sweep_no_pca.py  # Layer sweep without PCA
-│   ├── advbench_hs_exploratory.py         # AdvBench exploratory analysis
+│   ├── annotate_cp_llm.py                 # LLM-based CP annotation (Claude)
+│   ├── annotate_cp_llm_gpt4omini.py       # LLM-based CP annotation (GPT-4o-mini)
+│   ├── annotate_cp_llm_qwen3.py           # LLM-based CP annotation (Qwen3)
+│   ├── fig_concept_overview.py            # Generate concept overview figure
+│   ├── gemma2_cosine_compression.py       # Cosine compression analysis (Gemma-2)
+│   ├── gemma4_cosine_compression.py       # Cosine compression analysis (Gemma-4)
 │   ├── heuristic_cp.py                    # Heuristic commitment point detection
 │   ├── n6_multi_metric_ensemble.py        # Three-layer ensemble (Table 4)
+│   ├── n7_ensemble_loocv.py               # Ensemble LOOCV validation
+│   ├── plot_forest_precision.py           # Forest plot (precision, Figure 3)
+│   ├── plot_layer_heatmap.py              # Layer heatmap (Figure 2)
+│   ├── plot_pareto_two_stage.py           # Pareto two-stage plot (Figure 4)
+│   ├── plot_window_ablation.py            # Window ablation plot
+│   ├── r1_8b_cosine_compression.py        # Cosine compression analysis (R1-8B)
 │   ├── random_cp_control_qwq32b.py        # Random-label control experiment
 │   ├── run_7b8b_residualization.py        # Position residualization (7-8B)
 │   ├── run_a7_random_projection.py        # Random projection baseline
 │   ├── run_threshold_sensitivity.py       # K-threshold sensitivity ablation
-│   └── sf3_quadratic_residual.py          # Quadratic residualization analysis
+│   ├── sf3_quadratic_residual.py          # Quadratic residualization analysis
+│   ├── verify_bge_ensemble.py             # BGE ensemble verification
+│   └── verify_holdout.py                  # Holdout set verification (Table 3)
 ├── reproduce/                    # One-click reproduction scripts
 │   ├── reproduce_table2.sh       # HS vs. text comparison (Table 2)
 │   ├── reproduce_table3.sh       # Layer selection sensitivity (Table 3)

@@ -7,7 +7,7 @@ Evaluates both HS probe and Text (BGE-large) probe.
 
 import os
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-# os.environ["HF_ENDPOINT"] = "..."  # set HF mirror if needed
+# os.environ["HF_ENDPOINT"] = "https://huggingface.co"  # set if needed
 
 import sys
 import json
@@ -21,7 +21,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import balanced_accuracy_score
 from sklearn.preprocessing import StandardScaler
 
-sys.path.insert(0, "DATA_DIR")
+sys.path.insert(0, os.environ.get("DATA_DIR", "."))
 warnings.filterwarnings("ignore")
 
 BASE = Path("DATA_DIR")

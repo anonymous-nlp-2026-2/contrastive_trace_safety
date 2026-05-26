@@ -4,9 +4,9 @@ Replicates QwQ E-R9-4 protocol on 7-8B models.
 
 import sys, json, time, warnings, os
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-# os.environ["HF_DATASETS_OFFLINE"] = "1"  # uncomment for offline mode
-# os.environ["HF_HUB_OFFLINE"] = "1"  # uncomment for offline mode
-# os.environ["HF_ENDPOINT"] = "..."  # set HF mirror if needed
+os.environ["HF_DATASETS_OFFLINE"] = "1"
+os.environ["HF_HUB_OFFLINE"] = "1"
+# os.environ["HF_ENDPOINT"] = "https://huggingface.co"  # set if needed
 
 import numpy as np
 import torch
@@ -42,7 +42,7 @@ MODEL_CONFIGS = {
     },
 }
 
-ST_MODEL_PATH = "MODEL_DIR/bge-large-en-v1.5/snapshots"
+ST_MODEL_PATH = os.environ.get("MODEL_DIR", "models") + "/bge-large-en-v1.5"
 TEXT_DIM = 1024
 
 

@@ -6,7 +6,7 @@ Pairs: pre-CP hidden states (x+) vs post-CP hidden states (x-).
 
 import os, sys, json, glob, warnings
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-# os.environ["HF_ENDPOINT"] = "..."  # set HF mirror if needed
+# os.environ["HF_ENDPOINT"] = "https://huggingface.co"  # set if needed
 warnings.filterwarnings("ignore")
 
 import numpy as np
@@ -15,7 +15,7 @@ import torch.nn as nn
 from pathlib import Path
 from sklearn.metrics import balanced_accuracy_score, precision_score
 
-sys.path.insert(0, "DATA_DIR")
+sys.path.insert(0, os.environ.get("DATA_DIR", "."))
 from src.config import SEED, DETECTION_WINDOW
 
 PROJECT = Path("DATA_DIR")

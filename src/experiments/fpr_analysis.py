@@ -10,7 +10,7 @@ import torch
 import torch.nn as nn
 from sklearn.linear_model import LogisticRegression
 
-sys.path.insert(0, 'DATA_DIR')
+sys.path.insert(0, os.environ.get('DATA_DIR', '.'))
 from src.data_loader import prepare_dataset, split_data
 from src.config import TRAIN_RATIO, VAL_RATIO, SEED, DETECTION_WINDOW, LAYERS, HIDDEN_DIM
 from src.eval.evaluate import first_crossing_point, detection_lead_time, step_accuracy

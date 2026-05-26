@@ -123,10 +123,8 @@ Soumya~Suvra Ghosal, Souradip Chakraborty, Vaibhav Singh, Furong Huang, Dinesh
   reasoning models is only a few early steering steps away}.
 \newblock \emph{arXiv preprint arXiv:2602.11096}.
 
-\bibitem[{Guha et~al.(2025)Guha, Marten, Keh, Bhatia, Ragan-Kelley, Narang, and
-  Hashimoto}]{openthinker}
-Etash Guha, Ryan Marten, Sedrick Keh, Saumya Bhatia, Jonathan Ragan-Kelley,
-  Sharan Narang, and Tatsunori Hashimoto. 2025.
+\bibitem[{Guha et~al.(2025)Guha, Marten, Keh, Raoof et~al.}]{openthinker}
+Etash Guha, Ryan Marten, Sedrick Keh, Negin Raoof, and 1 others. 2025.
 \newblock \href {https://arxiv.org/abs/2506.04178} {Open{T}houghts: Data
   recipes for reasoning models}.
 \newblock \emph{arXiv preprint arXiv:2506.04178}.
@@ -173,8 +171,8 @@ Peichun Hua, Hao Li, Shanghao Shi, Zhiyuan Yu, and Ning Zhang. 2026.
 Yilei Jiang, Xinyan Gao, Tianshuo Peng, Yingshui Tan, Xiaoyong Zhu, Bo~Zheng,
   and Xiangyu Yue. 2025.
 \newblock \href {https://arxiv.org/abs/2502.14744} {{HiddenDetect}: Detecting
-  jailbreak attacks against large vision-language models via monitoring hidden
-  states}.
+  jailbreak attacks against multimodal large language models via monitoring
+  hidden states}.
 \newblock In \emph{Proceedings of the 63rd Annual Meeting of the Association
   for Computational Linguistics (ACL)}.
 
@@ -224,7 +222,7 @@ Samuel Marks and Max Tegmark. 2024.
 \newblock \href {https://arxiv.org/abs/2310.06824} {The geometry of truth:
   Emergent linear structure in large language model representations of
   true/false datasets}.
-\newblock \emph{arXiv preprint arXiv:2310.06824}.
+\newblock In \emph{Conference on Language Modeling (COLM)}.
 
 \bibitem[{Meyoyan and Del~Corro(2026)}]{meyoyan2026bertology}
 Gonzalo~Ariel Meyoyan and Luciano Del~Corro. 2026.
@@ -342,11 +340,14 @@ Jiaqi Wu, Chen Chen, Chunyan Hou, and Xiaojie Yuan. 2025.
 \newblock In \emph{Findings of the Association for Computational Linguistics:
   EMNLP 2025}.
 
-\bibitem[{Xiao et~al.(2023)Xiao, Liu, Zhang, and Muennighoff}]{xiao2023cpack}
-Shitao Xiao, Zheng Liu, Peitian Zhang, and Niklas Muennighoff. 2023.
+\bibitem[{Xiao et~al.(2024)Xiao, Liu, Zhang, Muennighoff, Lian, and
+  Nie}]{xiao2023cpack}
+Shitao Xiao, Zheng Liu, Peitian Zhang, Niklas Muennighoff, Defu Lian, and
+  Jian-Yun Nie. 2024.
 \newblock \href {https://arxiv.org/abs/2309.07597} {C-pack: Packaged resources
   to advance general chinese embedding}.
-\newblock \emph{arXiv preprint arXiv:2309.07597}.
+\newblock In \emph{Proceedings of the 47th International ACM SIGIR Conference
+  on Research and Development in Information Retrieval}.
 
 \bibitem[{Yan et~al.(2026)Yan, Lin, Zhu, and Wang}]{safedream2026}
 Bo~Yan, Weikai Lin, Yada Zhu, and Song Wang. 2026.
@@ -410,9 +411,10 @@ Andy Zou, Long Phan, Sarah Chen, James Campbell, Phillip Guo, Richard Ren,
   A top-down approach to {AI} transparency}.
 \newblock \emph{arXiv preprint arXiv:2310.01405}.
 
-\bibitem[{Zou et~al.(2023{\natexlab{b}})Zou, Wang, Kolter, and
+\bibitem[{Zou et~al.(2023{\natexlab{b}})Zou, Wang, Carlini, Nasr, Kolter, and
   Fredrikson}]{advbench}
-Andy Zou, Zifan Wang, J.~Zico Kolter, and Matt Fredrikson. 2023{\natexlab{b}}.
+Andy Zou, Zifan Wang, Nicholas Carlini, Milad Nasr, J.~Zico Kolter, and Matt
+  Fredrikson. 2023{\natexlab{b}}.
 \newblock Universal and transferable adversarial attacks on aligned language
   models.
 \newblock \emph{arXiv preprint arXiv:2307.15043}.

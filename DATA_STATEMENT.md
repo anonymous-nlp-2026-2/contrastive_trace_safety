@@ -37,9 +37,20 @@
 - **License:** Apache 2.0
 - **Usage:** Hidden state extraction and probe evaluation (primary 7B model)
 
+### Gemma-2-9B-it
+- **Source:** Google
+- **License:** Gemma Terms of Use
+- **Usage:** Cross-architecture cosine compression analysis (non-reasoning baseline)
+
+### Gemma-4-E4B
+- **Source:** Google
+- **License:** Gemma Terms of Use
+- **Usage:** Cross-architecture analysis (non-reasoning baseline)
+
 ### Sentence Encoders (Text Baselines)
 - **all-MiniLM-L6-v2** (384d): Apache 2.0
 - **BGE-large-en-v1.5** (1024d): MIT License
+- **E5-Mistral-7B-Instruct** (4096d): MIT License — large text encoder baseline
 - **Usage:** Text embedding baselines for HS vs. text comparison
 
 ## Ethical Considerations
